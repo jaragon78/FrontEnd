@@ -1,0 +1,72 @@
+{
+	"portfolioWeb": "Portfolio Aragon Juan Ignacio",
+	"info-data": {
+		"info-name": "Juan Ignacio Aragon",
+		"info-company": "Coordinador ABAP en Violetta Cosmeticos",
+		"info-contact": "Buenos Aires (Argentina)",
+		"info-acercade": "Resumen corto de mi persona"
+	},
+	"info": {
+		"info-experience": [
+			{
+				"titulo": "Consultor ABAP Sr.",
+				"puesto-empresa": "Coordinador ABAP - Violetta Cosmeticos",
+				"tiempo": "Ago 2020 - actualidad",
+				"lugar": "Buenos Aires, Argentina"
+			},
+			{
+				"titulo": "Consultor ABAP Sr.",
+				"puesto-empresa": "Programador ABAP - FV S.A.",
+				"tiempo": "Mar 2015 - Jul 2020",
+				"lugar": "Buenos Aires, Argentina"
+			},
+			{
+				"titulo": "Consultor ABAP Sr.",
+				"puesto-empresa": "Programador ABAP - Neoris",
+				"tiempo": "Sep 2011 - Feb 2015",
+				"lugar": "Capital Federal, Argentina"
+			}
+		],
+		"info-education": [
+			{
+				"universidad": "Argentina Programa",
+				"titulo": "Full Stack - Web",
+				"tiempo": "2021 - Actualidad",
+				"sede": "Plataforma Virtual"
+			},
+			{
+				"universidad": "UNTREF",
+				"titulo": "Analista en Computación",
+				"tiempo": "2008 - 2015",
+				"sede": "Caseros, Buenos Aires, Argentina"
+			},
+			{
+				"universidad": "Fac. Ingenieria - UBA",
+				"titulo": "",
+				"tiempo": "1998 - 2007",
+				"sede": "Capital Federal, Argentina"
+			}
+		],
+		"info-HardSoftSkills": [
+			{
+				"Skill": "Responsabilidad",
+				"Porc": "90%"
+			},
+			{
+				"Skill": "Resolución de Problemas",
+				"Porc": "80%"
+			},
+			{
+				"Skill": "Diseño de sistemas",
+				"Porc": "70%"
+			}
+		],
+		"info-project": [
+			{
+				"name": "Argentina Programa - #YoProgramo",
+				"decrip": "Proyecto Integrador Portfolio Web Full Stack",
+				"Coment": "Desarrollamos una aplicación web full stack, que muestra: datos personales, estudios cursados, experiencia laboral, conocimiento de las tecnologías, ¡crear tu propio portfolio web!"
+			}
+		]
+	}
+}
