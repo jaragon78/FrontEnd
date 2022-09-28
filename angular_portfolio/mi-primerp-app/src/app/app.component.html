@@ -1,0 +1,13 @@
+<div class = "container">
+  <app-button
+    color="{{showAddPersona ? 'red' : 'green'}}"
+    text="{{showAddPersona ? 'close' : 'Add'}}"
+    (btnClick)="toggleAddPersona()"
+    *ngIf="hasRoute('/')">
+  </app-button>
+
+  <app-personas></app-personas>
+  <router-outlet></router-outlet>
+  <app-footer></app-footer>
+
+</div>

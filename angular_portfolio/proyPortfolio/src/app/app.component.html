@@ -1,0 +1,37 @@
+
+<div class="container-fluid">   
+    <app-top-nav-bar></app-top-nav-bar>       
+    <div class="wrapper"> 
+    <!--html> 
+        <router-outlet></router-outlet>  
+        <section *ngIf id="#Login"> 
+    </html-->       
+
+        <section id="Encabezado">  
+            <p><app-encabezado></app-encabezado></p>
+        </section>
+        <section id="AcercaDe"> 
+            <p><app-acerca-de></app-acerca-de></p>
+        </section>        
+        <section id="Experiencia"> 
+            <app-experiencia-y-educacion></app-experiencia-y-educacion>
+        </section> 
+        <section id="Aptitudes"> 
+            <app-aptitudes></app-aptitudes>
+        </section>     
+        <section id="Logros">
+            <app-logros></app-logros>
+        </section> 
+ 
+    </div>
+</div>
+
+<nav> 
+    <router-outlet></router-outlet>  
+</nav>
+
+
+    
+
+
+

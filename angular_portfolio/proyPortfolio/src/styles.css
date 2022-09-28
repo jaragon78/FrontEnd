@@ -1,3 +1,4 @@
+/* You can add global styles to this file, and also import other style files */
 .mat-card {
     border: 1px solid;
     border-radius: 32px;
@@ -13,19 +14,20 @@
   }
 
   .mat-card#second-card {
-    padding: 0px;
+    padding: 10px;
   }
 
   .mat-card#third-card {
-    padding: 0px;
+    padding: 10px;
   }
 
   .mat-card#fourth-card {
     padding: 0px;
+    display: flex;  
   }
 
   .mat-card#fifth-card {
-    padding: 0px;
+    padding: 10px;
   }
 
   div#profile-background{
