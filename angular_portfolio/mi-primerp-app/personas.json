@@ -1,0 +1,28 @@
+{
+  "personas": [
+    {
+      "id": 2,
+      "nombre": "mel",
+      "apellido": "morelli",
+      "edad": 42
+    },
+    {
+      "id": 4,
+      "nombre": "juan",
+      "apellido": "Aragon",
+      "edad": 43
+    },
+    {
+      "id": 5,
+      "nombre": "prueba",
+      "apellido": "prueba",
+      "edad": 10
+    },
+    {
+      "id": 6,
+      "nombre": "lauti",
+      "apellido": "",
+      "edad": 5
+    }
+  ]
+}

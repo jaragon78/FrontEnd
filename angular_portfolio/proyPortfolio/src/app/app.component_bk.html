@@ -1,0 +1,21 @@
+
+<div class="container-fluid">
+    <ul>
+        <li><a routerLink="/Home" routerLinkActive="active">Inicio</a></li>
+        <li><a routerLink="/Profile" routerLinkActive="active" *ngIf="this.authService.logIn">Perfil</a></li>  
+        <li><a routerLink="/Login" routerLinkActive="active" *ngIf="!this.authService.logIn">Login</a></li> 
+        <li><a class="nav-link" (click)="this.authService.logout()" href="#" *ngIf="this.authService.logIn">Logout</a></li>                    
+
+        <li><a routerLink="/Encabezado">Encabezado</a></li>
+        <li><a routerLink="/AcercaDe">Acerca de</a></li>
+        <li><a routerLink="/Aptitudes">Aptitudes</a></li>
+        <li><a routerLink="/Experiencia">Experiencia</a></li>
+        <li><a routerLink="/Logros">Logros</a></li>
+    </ul>
+
+    <router-outlet></router-outlet>
+
+
+</div>
+
+

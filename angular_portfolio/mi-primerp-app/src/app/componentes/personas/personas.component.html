@@ -1,0 +1,11 @@
+<app-add-persona
+  (onAddPersona)="addPersona($event)">
+</app-add-persona>
+
+<div class = "Personas">
+    <h3>Es nuestra lista de personas!!!</h3>
+    <div *ngFor="let persona of personas">
+      <app-persona [persona]="persona"
+      (deletePersona)="borrarPersonaDeLista($event)"></app-persona>
+    </div>
+</div>

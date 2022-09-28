@@ -1,0 +1,18 @@
+<circle-progress class="circle__progress"
+    [percent]="aptitud.Porc"
+    [animation]="true"
+    [animationDuration]="300"
+    [startFromZero]="true"
+    [showInnerStroke]="true"
+    [titleFontSize]="'28'"
+    [titleFontWeight]="'900'"
+    [unitsFontSize]="'28'"
+    [unitsFontWeight]="'900'"
+    [subtitle] = "aptitud.Skill"
+    [subtitleFontSize]="'12'"
+    [lazy]="false"
+></circle-progress>  
+<div>
+    <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a>
+    <a href="#" class="btn-right" (click)="onDeleteApt(aptitud)"><span><img src="./assets/trash.svg"></span></a>
+</div> 
