@@ -1,0 +1,239 @@
+<div class="container">
+    <h2>Busqueda</h2>
+      <div class="col">
+        <div class="form-group">
+          <input type="text" class="form-control" name="filterPost" placeholder="Search..." [(ngModel)]="filterPost">
+        </div>
+        <div *ngIf="!(filterPost.length < 2); then busqueda"></div>
+        <ng-template #busqueda>
+          <div class="table-responsive">   
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Apellido</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                  </tr>
+                </thead>
+                <tbody>                   
+                  <tr *ngFor="let post of posts | filter:filterPost">                
+                    <td>{{post.nombre}}</td>
+                    <td>{{post.apellido}}</td>
+                    <td> <button type="button" class="btn btn-primary" (click)="visualizarPerfil(post.username)">{{ post.username }} </button></td>
+                    <td>{{post.email}}</td>
+                  </tr> 
+              </tbody>
+            </table>
+            </div>  
+        </ng-template>  
+    </div>
+</div>     
+
+
+<!--Muestro perfil seleccionado-->
+  <ng-template [ngIf]="mostrarPerfil">
+<!--Encabezado-->
+    <div class="card mat-card" id="first-card"> 
+        <div id="profile-background"><img [src]="persona.url_fondo"></div>
+        <div id="info" style="padding: 20px;"> 
+            <div id="info-img">
+                <img class="profile-image" [src]="persona.url_foto">
+            </div>
+            <div id="info-data">
+                <div class="row">          
+                    <div class="flex-container">
+                        <div class= col-md-10-fluid><h2>{{persona.nombre + " " + persona.apellido}}</h2></div>
+                        <div class= col-md-2-fluid style="text-align: right">
+                        </div>    
+                    </div>
+                    <div class="flex-container">
+                        <div id="info-contact"> 
+                            <button type="button" class="btn btn-primary" (click)="openContacto(contenido2)">Información de contacto</button>
+                        </div>                     
+                    </div>                 
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    <form [formGroup]="form" class="m-5">
+        <ng-template #contenido2 let-modal>
+         <!-- Modal -->
+         <div class="modal-header">
+            <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+           <h4 class="modal-title">Información de Contacto</h4>
+         </div>
+         <div class="modal-body">      
+            <div class="form-group">
+                <label for="formGroupExampleInput3">Telefono</label>
+                <input type="text" class="form-control" id="telefono" placeholder="" 
+                value="{{persona.telefono}}" formControlName="telefono">
+            </div>
+            
+            <div class="form-group">
+                <label for="formGroupExampleInput4">Correo</label>
+                <input type="text" class="form-control" id="correo" placeholder="" 
+                value="{{persona.correo}}" formControlName="correo">
+            </div>              
+          </div>
+        </ng-template>
+    </form>
+</ng-template>     
+
+<!--Acerca de-->
+<ng-template [ngIf]="mostrarAcercaDe">
+<div class="card mat-card" id="second-card">
+      <div id="info"> 
+          <div id="info-acercade">
+              <div class="row">           
+                  <div class="container">
+                      <div>              
+                          <h2>Acerca de</h2>               
+                          <h6 id="sobremi">{{persona.sobre_mi}}</h6>
+                      </div>         
+                 </div>
+              </div>
+          </div>
+      </div>
+  </div>    
+</ng-template>
+<ng-template [ngIf]="mostrarExperiencia">
+<!--Experiencia-->
+    <div class="row" class="card mat-card" id="third-card">
+      <div id="info">
+      <div id="info-experience">
+          <div class="row">
+              <div class="flex-container">
+                  <div>
+                      <h2>Experiencia</h2>
+                  </div>
+              </div>
+          </div>
+      
+          <div class="row">
+              <ul class="items-list">
+                  <div *ngFor="let experiencia of experienciaList | orderBy: 'fechaInicio' : true">
+                      <div class="flex-container">
+                          <div class="col-md-1">                   
+                              <a href={{experiencia.paginaWeb}}> <img [src]="experiencia.logo" class="img-fluid" /></a>
+                          </div>                                             
+                          <div class="col-md-10-fluid">
+                              <h4>{{experiencia.nombre_empresa}}</h4>
+                              <h6>{{experiencia.descripcion}}</h6>
+                              <p class="text-secondary">{{experiencia.tipoEmpleo}}</p>
+                              <p type = "date" class="text-secondary">{{modificarFechas(experiencia.fechaInicio) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase}} - 
+                                  {{modificarFechas(experiencia.fechaFin) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase}}</p>
+                          </div>
+                      </div> 
+                    </div>
+              </ul>
+          </div>  
+      </div>                                             
+      </div>
+  </div>
+</ng-template>
+<ng-template [ngIf]="mostrarEducacion"> 
+<!--Educacion-->
+  <div class="row" class="card mat-card" id="third-card">
+    <div id="info"> 
+    <div id="info-education">
+        <div class="row">   
+            <div class="flex-container">              
+                <div>
+                    <h2>Educación</h2>
+                </div>
+            </div>   
+        </div>
+        <div class="row">
+            <ul class="items-list">
+                <div *ngFor="let educacion of educacionList | orderBy: 'fechaInicio' : true">  
+                    <div class="flex-container">
+                        <div class="col-md-1"> 
+                            <a href={{educacion.paginaWeb}}> <img [src]="educacion.logo"  class="img-fluid" /></a>
+                        </div>
+                        <div class="col-md-10-fluid">                                       
+                            <h4>{{educacion.universidad}}</h4>
+                            <h6>{{educacion.titulo}}</h6>
+                            <p type="date" class="text-secondary">{{modificarFechas(educacion.fechaInicio) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase }} - 
+                                {{modificarFechas(educacion.fechaFin) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase}}</p>
+                            <p class="text-secondary"></p>
+                        </div>
+                    </div>                         
+                </div>
+            </ul>                        
+        </div>                       
+    </div>   
+
+    </div>
+</div>
+</ng-template>
+<!--Aptitudes-->
+<ng-template [ngIf]="mostrarAptitudes">
+<div class="card mat-card" id="fourth-card">
+  <div id="info"> 
+      <div id="info-project">
+          <div class="row">
+              <div class="flex-container">
+                  <div>
+                      <h2>Hard Skills & Soft Skills</h2>
+                  </div>
+              </div>
+          </div>
+          <div class="row">              
+              <div class="flex-container">
+                <ul class="list-group list-group-horizontal-md">
+                      <div  *ngFor="let aptitudes of aptitudesList | orderBy: 'porc' : true" >                                              
+                          <circle-progress class="circle__progress"
+                              [percent]="aptitudes.porc"
+                              [animation]="true"
+                              [animationDuration]="300"
+                              [startFromZero]="true"
+                              [showInnerStroke]="true"
+                              [titleFontSize]="'28'"
+                              [titleFontWeight]="'900'"
+                              [unitsFontSize]="'28'"
+                              [unitsFontWeight]="'900'"
+                              [subtitle]="aptitudes.skill"
+                              [subtitleFontSize]="'12'"
+                              [lazy]="false"
+                          ></circle-progress>                                                       
+                      </div> 
+                  </ul>   
+              </div>                                
+              </div>                     
+      </div>
+  </div>
+</div>
+</ng-template>
+<!--Logros-->
+<ng-template [ngIf]="mostrarLogros">
+<div class="card mat-card" id="fifth-card">
+  <div id="info"> 
+      <div id="info-project">
+          <div class="row">
+              <div class="flex-container">
+                  <div>
+                      <h2>Proyectos</h2>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="row">   
+              <ul class="items-list">
+                  <div *ngFor="let logro of logrosList | orderBy: 'nombre'">                                       
+                      <div class="flex-container">                  
+                          <div class="col-md-10-fluid">
+                              <h4 class="text-primary">{{logro.nombre}}</h4>
+                              <h6 class="text-secondary">{{logro.descripcion}}</h6>
+                              <h6 class="text-secondary">{{logro.comentario}}</h6>
+                          </div>
+                      </div> 
+                    </div>
+              </ul> 
+          </div>                         
+      </div>
+  </div>
+</div>
+</ng-template>
+  

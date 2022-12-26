@@ -1,0 +1,156 @@
+<div class="row" class="card mat-card" id="third-card">
+    <div id="info">
+    <div id="info-experience">
+        <div class="row">
+            <div class="flex-container">
+                <div class="col-md-11">
+                    <h2>Experiencia</h2>
+                </div>
+                <div class="col-md-1" style="margin-top: 30px; text-align: right;">
+                    <img src="./assets/plus.svg" (click)="agregarItem(contenido2)">
+                  <!--  <img src="./assets/pencil.svg"(click)="openPopPup(contenido)"> -->
+                </div>
+            </div>
+        </div>
+    
+        <div class="row" style="padding: 40px;">
+            <ul class="items-list">
+                <li *ngFor="let experiencia of experienciaList | orderBy: 'fechaInicio' : true">
+                    <!--
+                    <app-experiencia [experiencia]="experiencia"
+                    (deleteExperiencia)="deleteListaExp(experiencia)"></app-experiencia>
+                    -->    
+                    <div class="flex-container">
+                        <div class="col-md-1">                   
+                            <a href={{experiencia.paginaWeb}}> <img [src]="experiencia.logo"  width="50" /></a>
+                        </div>                                             
+                        <div class="col-md-10">
+                            <h4>{{experiencia.nombre_empresa}}</h4>
+                            <h6>{{experiencia.descripcion}}</h6>
+                            <p class="text-secondary">{{experiencia.tipoEmpleo}}</p>
+                            <p type = "date" class="text-secondary">{{modificarFechas(experiencia.fechaInicio) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase}} - 
+                                {{modificarFechas(experiencia.fechaFin) | date:'EEE d, MMM yyyy': undefined:'es' | titlecase}}</p>
+                        </div>
+
+                        <div class="col-md-1" style="margin-top: 30px; text-align: right;">
+                         <!--   <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a> 
+                            <a href="#" class="btn-right" ><span> </span></a> -->
+                            <img src="./assets/trash.svg" (click)="borrarItem(experiencia)">
+                            <img src="./assets/pencil.svg" (click)="openPopPup(experiencia,contenido)">
+                        </div> 
+                    </div> 
+                </li>
+            </ul>
+        </div>  
+    </div>                                             
+    </div>
+</div>
+
+<form [formGroup]="form" class="m-5" >
+    <ng-template #contenido let-modal>
+     <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <h4 class="modal-title">Experiencia Laboral</h4>
+     </div>
+     <div class="modal-body">
+      <!--   <li *ngFor="let experiencia of experienciaList">-->
+        <div class="form-group">
+            <label for="formGroupExampleInput">Empresa</label>
+            <input type="text" class="form-control" id="nombre_empresa" placeholder="" 
+            value="{{experiencia.nombre_empresa}}" formControlName="nombre_empresa">
+        </div>
+        
+        <div class="form-group"> 
+            <label for="formGroupExampleInput2">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="" 
+            value="{{experiencia.descripcion}}" formControlName="descripcion">
+        </div>
+        
+        <div class="form-group">
+            <label for="formGroupExampleInput3">Fecha Inicio</label>
+            <input type="date" class="form-control" id="fechaInicio" placeholder="" 
+            value="{{experiencia.fechaInicio}}" formControlName="fechaInicio">
+        </div>
+        
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Fecha Fin</label>
+            <input type="date" class="form-control" id="fechaFin" placeholder="" 
+            value="{{experiencia.fechaFin}}" formControlName="fechaFin">
+        </div>              
+    
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Link Logo</label>
+            <input type="text" class="form-control" id="logo" placeholder="" 
+            value="{{experiencia.logo}}" formControlName="logo">
+        </div> 
+
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Pagina Web</label>
+            <input type="text" class="form-control" id="paginaWeb" placeholder="" 
+            value="{{experiencia.paginaWeb}}" formControlName="paginaWeb">
+        </div> 
+
+      <!--   </li>-->
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <button type="submit" aria-hidden="true" (click)="guardarCambios(experiencia)">&check;</button>
+     </div>
+    
+    </ng-template>
+</form>
+
+<form [formGroup]="form2" class="m-5">
+    <ng-template #contenido2 let-modal2>
+     <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <h4 class="modal-title">Experiencia Laboral</h4>
+     </div>
+     <div class="modal-body">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Empresa</label>
+            <input type="text" class="form-control" id="nombre_empresa" placeholder="" 
+            value="" formControlName="nombre_empresa">
+        </div>
+        
+        <div class="form-group"> 
+            <label for="formGroupExampleInput2">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="" 
+            value="" formControlName="descripcion">
+        </div>
+        
+        <div class="form-group">
+            <label for="formGroupExampleInput3">Fecha Inicio</label>
+            <input type="date" class="form-control" id="fechaInicio" placeholder="" 
+            value="" formControlName="fechaInicio">
+        </div>
+        
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Fecha Fin</label>
+            <input type="date" class="form-control" id="fechaFin" placeholder="" 
+            value="" formControlName="fechaFin">
+        </div>              
+    
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Link Logo</label>
+            <input type="text" class="form-control" id="logo" placeholder="" 
+            value="" formControlName="logo">
+        </div> 
+
+        <div class="form-group">
+            <label for="formGroupExampleInput4">Pagina Web</label>
+            <input type="text" class="form-control" id="paginaWeb" placeholder="" 
+            value="" formControlName="paginaWeb">
+        </div> 
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <button type="button" aria-hidden="true" (click)="agregarExperiencia($event)">&check;</button>
+     </div>
+    
+    </ng-template>
+</form>
