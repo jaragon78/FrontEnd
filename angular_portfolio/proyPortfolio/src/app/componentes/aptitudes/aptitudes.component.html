@@ -6,21 +6,19 @@
                     <div class="col-md-11">
                         <h2>Hard Skills & Soft Skills</h2>
                     </div>
-                    <div class="col-md-1" style="margin-top: 30px; text-align: right;">
-                        <a href="#" class="btn-right"><span><img src="./assets/plus.svg"></span></a>
+                    <div class="col-md-1" style="margin-top: 0px; text-align: right;">
+                        <img src="./assets/plus.svg" (click)="agregarItem(contenido2)">
+                       <!--  <img src="./assets/pencil.svg" (click)="openPopPup(contenido)"> -->
                     </div>
                 </div>
             </div>
             
-            <div class="row" style="padding: 10px;">  
+            <div class="row" style="padding: 10px;">           
                 <div class="flex-container">
-                    <ul class="list-group list-group-horizontal-md">
-                        <li class="list-group-item" *ngFor="let aptitudes of aptitudesList" >                                              
-                            <app-aptitud [aptitud]="aptitudes"
-                            (deleteAptitud)="deleteListaApt(aptitudes)"></app-aptitud>   
-                            <!--  
+                    <ul class="list-group list-group-horizontal-sm">
+                        <div *ngFor="let aptitudes of aptitudesList | orderBy: 'porc' : true" >                             
                             <circle-progress class="circle__progress"
-                                [percent]="aptitudes.Porc"
+                                [percent]="aptitudes.porc"
                                 [animation]="true"
                                 [animationDuration]="300"
                                 [startFromZero]="true"
@@ -29,19 +27,84 @@
                                 [titleFontWeight]="'900'"
                                 [unitsFontSize]="'28'"
                                 [unitsFontWeight]="'900'"
-                                [subtitle]="aptitudes.Skill"
+                                [subtitle]="aptitudes.skill"
                                 [subtitleFontSize]="'12'"
                                 [lazy]="false"
                             ></circle-progress>  
                             <div>
-                            <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a>
-                            <a href="#" class="btn-right"><span><img src="./assets/trash.svg"></span></a>
+                            <!-- <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a>
+                            <a href="#" class="btn-right"><span></span></a> -->
+                            <img src="./assets/trash.svg" (click)="borrarItem(aptitudes)">  
+                            <img src="./assets/pencil.svg" (click)="openPopPup(aptitudes,contenido)"> 
                             </div>  
-                            -->                                                   
-                        </li> 
+                                                                               
+                        </div> 
                     </ul>   
-                </div>                                
+                </div> 
+                                           
             </div>                       
         </div>
     </div>
 </div>
+
+<form [formGroup]="form" class="m-5">   
+<ng-template #contenido let-modal>
+     <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <h4 class="modal-title">Skills</h4>
+     </div>
+      
+     <div class="modal-body">
+      <!--  <li *ngFor="let aptitudes of aptitudesList let i=index"> -->
+            
+            <div class="form-group">
+                <label for="formGroupExampleInput">Skill</label>
+                <input type="text" class="form-control" id="skill" placeholder="" 
+                 value="{{aptitud.skill}}" formControlName="skill">
+            </div>
+            
+            <div class="form-group"> 
+                <label for="formGroupExampleInput2">Puntuación</label>
+                <input type="number" min="0" max="100" class="form-control" id="porc" placeholder="" 
+                value="{{aptitud.porc}}"  formControlName="porc">
+            </div>
+          
+       <!-- </li>-->
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <button type="submit" aria-hidden="true" (click)="guardarCambios(aptitud)">&check;</button>
+     </div>   
+</ng-template>
+</form>
+
+<form [formGroup]="form2" class="m-5">
+    <ng-template #contenido2 let-modal2>
+     <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <h4 class="modal-title">Skills</h4>
+     </div>
+     <div class="modal-body">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Skill</label>
+            <input type="text" class="form-control" id="skill" placeholder="" 
+            value="" formControlName="skill">
+        </div>
+        
+        <div class="form-group"> 
+            <label for="formGroupExampleInput2">Puntuación</label>
+            <input type="number" min="0" max="100" class="form-control" id="porc" placeholder="" 
+            value="" formControlName="porc">
+        </div>
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <button type="button" aria-hidden="true" (click)="agregarAptitud($event)">&check;</button>
+     </div>
+    
+    </ng-template>
+</form>

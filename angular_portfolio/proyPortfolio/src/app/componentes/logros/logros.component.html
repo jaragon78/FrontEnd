@@ -6,33 +6,37 @@
                     <div class="col-md-11">
                         <h2>Proyectos</h2>
                     </div>
-                    <div class="col-md-1" style="margin-top: 30px; text-align: right;">
-                        <a href="#" class="btn-right"><span><img src="./assets/plus.svg"></span></a>
+                    <div class="col-md-1" style="margin-top: 0px; text-align: right;">
+                        <img src="./assets/plus.svg" (click)="agregarItem(contenido2)">
+                      <!--  <img src="./assets/pencil.svg"(click)="openPopPup(contenido)"> --> 
                     </div>
                 </div>
             </div>
             
-            <div class="row" style="padding: 40px;">   
+            <div class="row">   
                 <ul class="items-list">
-                    <li *ngFor="let logro of logrosList"> 
+                    <div *ngFor="let logro of logrosList | orderBy: 'nombre'"> 
+                        <!--
                         <app-logro [logro]="logro"
                         (deleteLogro)="deleteListaLogro(logro)"></app-logro>
-
-                        <!--                                         
+                         --> 
+                                                                 
                         <div class="flex-container">                  
                             <div class="col-md-10">
-                                <h4 class="text-primary">{{logro.name}}</h4>
-                                <h6 class="text-secondary">{{logro.descrip}}</h6>
-                                <h6 class="text-secondary">{{logro.coment}}</h6>
+                                <h4 class="text-primary">{{logro.nombre}}</h4>
+                                <h6 class="text-secondary">{{logro.descripcion}}</h6>
+                                <h6 class="text-secondary">{{logro.comentario}}</h6>
                             </div>
-                            <div class="col-md-2" style="margin-top: 30px; text-align: right;">
-                                <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a>
-                                <a href="#" class="btn-right"><span><img src="./assets/trash.svg"></span></a>
+                            <div class="col-md-2" style="margin-top: 0px; text-align: right;">
+                               <!-- <a href="#" class="btn-right"><span><img src="./assets/pencil.svg"></span></a> 
+                                <a href="#" class="btn-right"><span></span></a> -->
+                                <img src="./assets/trash.svg" (click)="borrarItem(logro)">
+                                <img src="./assets/pencil.svg" (click)="openPopPup(logro,contenido)">
                             </div>                    
                             
                         </div>
-                        --> 
-                    </li>
+                       
+                    </div>
                 </ul> 
             </div>                         
         </div>
@@ -40,3 +44,78 @@
 </div>
 
 
+<form [formGroup]="form" class="m-5">  <!-- (ngSubmit)="guardarCambios()" novalidate> -->
+    
+    <ng-template #contenido let-modal>
+    <!--<div formArrayName="formLogros">  -->
+        <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <h4 class="modal-title">Proyectos</h4>
+     </div>
+     <div class="modal-body">
+        <!--   <div  *ngFor="let logro of logrosList let i=index"> -->
+            <!--logro of formLogros.controls ">-->
+        <div class="form-group">
+            <label for="nombre">Proyecto</label>
+            <input type="text" class="form-control" id="nombre" placeholder="" 
+            value="{{logro.nombre}}" formControlName= "nombre">
+        </div>
+
+        <div class="form-group"> 
+            <label for="descripcion">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" placeholder="" 
+            value="{{logro.descripcion}}" formControlName="descripcion">
+        </div>
+        <div class="form-group">
+            <label for="comentario">Comentario</label>
+            <textarea  id="comentario" name="comentario" formControlName="comentario" value="{{logro.comentario}}" 
+            class="form-control"  style="width: 100%; height: 200px;" >
+            </textarea>
+        </div>
+        <!--   </div>-->
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal.dismiss()">&times;</button>
+       <button type="submit" aria-hidden="true" (click)="guardarCambios(logro)">&check;</button>
+     </div>
+    <!--</div>-->
+    </ng-template>
+
+</form>
+
+<form [formGroup]="form2" class="m-5">  <!-- (ngSubmit)="guardarCambios()" novalidate> -->
+    <ng-template #contenido2 let-modal2>
+     <!-- Modal -->
+     <div class="modal-header">
+        <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <h4 class="modal-title">Proyectos</h4>
+     </div>
+     <div class="modal-body">
+        <div class="form-group">
+            <label for="formGroupExampleInput">Proyecto</label>
+            <input type="text" class="form-control" id="nombre" placeholder=" " 
+            value=" " formControlName="nombre">
+        </div>
+        
+        <div class="form-group"> 
+            <label for="formGroupExampleInput2">Descripcion</label>
+            <input type="text" class="form-control" id="descripcion" placeholder=" " 
+            value=" " formControlName="descripcion">
+        </div>
+        <div class="form-group">
+            <label for="formGroupExampleInput3">Comentario</label>
+            <textarea  id="comentario" name="comentario" formControlName="comentario" value=" " 
+            class="form-control"  style="width: 100%; height: 200px;" placeholder=" ">
+            </textarea>
+        </div>
+    </div>
+     
+    <div class="modal-footer">
+       <button aria-hidden="true" (click)="modal2.dismiss()">&times;</button>
+       <button type="button" aria-hidden="true" (click)="agregarLogro($event)">&check;</button>
+     </div>
+    
+    </ng-template>
+</form>
