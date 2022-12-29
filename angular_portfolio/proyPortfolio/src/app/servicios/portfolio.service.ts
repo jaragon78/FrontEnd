@@ -19,9 +19,9 @@ export class PortfolioService {
   experienciaList: Experiencia[] = []
   aptitudList: aptitud[] = []  
   logroList: logro[] = []    
-  API_URL = 'http://localhost:8080/api/test/';
+  API_URL = 'http://yoprogramo-jaragon78.koyeb.app/api/test'; //'http://localhost:8080/api/test/';
 
-  private apiUrl =  'http://localhost:8080';
+  private apiUrl =  'http://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080';
  // courrentUserSubject: BehaviorSubject<any>;
   //token: any; 
 
