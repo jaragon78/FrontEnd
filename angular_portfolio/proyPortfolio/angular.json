@@ -50,9 +50,6 @@
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
-              "outputHashing": "all"
-            },
-            "development": {
               "optimization": {
                 "scripts": true,
                 "styles": {
@@ -68,8 +65,8 @@
               "extractLicenses": true,
               "vendorChunk": false,
               "buildOptimizer": true
-                 
-
+            },
+            "development":{
             }
           },
           "defaultConfiguration": "production"
