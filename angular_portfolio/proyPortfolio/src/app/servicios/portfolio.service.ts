@@ -85,7 +85,7 @@ export class PortfolioService {
  // }
 
   public guardarPersona(persona: any): Observable<any>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'} ;
+    const headers = {'Access-Control-Allow-Origin': '*'} ;
     const url = `${this.apiUrl+"/new/persona"}`;
     const body = JSON.stringify(persona);
     console.log(url)
@@ -96,7 +96,7 @@ export class PortfolioService {
   }
 
   public guardarEducacion(educacion: any): Observable<any>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'} ;
+    const headers = {'Access-Control-Allow-Origin': '*'} ;
     const url = `${this.apiUrl+"/new/educacion"}`;
     const body = JSON.stringify(educacion);
     console.log(url)
@@ -107,7 +107,7 @@ export class PortfolioService {
   }
 
   public guardarExperiencia(experiencia: any): Observable<any>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'} ;
+    const headers = {'Access-Control-Allow-Origin': '*'} ;
     const url = `${this.apiUrl+"/new/expLaboral"}`;
     const body = JSON.stringify(experiencia);
     console.log(url)
@@ -117,7 +117,7 @@ export class PortfolioService {
   }
 
   public guardarAptitud(aptitud: any): Observable<any>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'} ;
+    const headers = {'Access-Control-Allow-Origin': '*'} ;
     const url = `${this.apiUrl+"/new/tecnologia"}`;
     const body = JSON.stringify(aptitud);
     console.log(url)
@@ -127,7 +127,7 @@ export class PortfolioService {
   }
 
   public guardarLogro(logro: any): Observable<any>{
-    const headers = { 'content-type': 'application/json', 'Access-Control-Allow-Origin': '*'} ;
+    const headers = {'Access-Control-Allow-Origin': '*'} ;
     const url = `${this.apiUrl+"/new/proyecto"}`;
     const body = JSON.stringify(logro);
     console.log(url)
