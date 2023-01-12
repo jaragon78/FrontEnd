@@ -5,10 +5,10 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs';
 import { StorageService } from './storage.service';
 
-const AUTH_API = 'https://yoprogramo-jaragon78.koyeb.app/api/auth/'; //'http://localhost:8080/api/auth/';
+const AUTH_API =  'https://yoprogramo-jaragon78.koyeb.app/api/auth/'; //'http://localhost:8080/api/auth/'; //
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' })
 };
 
 @Injectable({
