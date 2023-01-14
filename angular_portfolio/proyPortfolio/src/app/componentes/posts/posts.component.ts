@@ -15,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  private apiUrl = 'http://localhost:8080'; // 'http://yoprogramo-jaragon78.koyeb.app'; //
+  private apiUrl =  'http://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080'; //
   filterPost = '';
   posts: any[];
   persona: Persona;

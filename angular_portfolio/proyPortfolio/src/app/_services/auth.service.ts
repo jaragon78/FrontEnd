@@ -5,7 +5,7 @@ import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs';
 import { StorageService } from './storage.service';
 
-const AUTH_API =  'http://localhost:8080/api/auth/'; //'https://yoprogramo-jaragon78.koyeb.app/api/auth/'; //
+const AUTH_API =  'https://yoprogramo-jaragon78.koyeb.app/api/auth/'; //'http://localhost:8080/api/auth/'; //'
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
