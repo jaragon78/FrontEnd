@@ -90,7 +90,7 @@ export class PortfolioService {
     const body = JSON.stringify(persona);
     console.log(url)
     console.log(JSON.stringify(persona))
-    return this.http.post(url,body,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
     //return this.http.post("http://localhost:8080/new/educacion", body,{'headers':headers});
    
   }
@@ -101,7 +101,7 @@ export class PortfolioService {
     const body = JSON.stringify(educacion);
     console.log(url)
     console.log(JSON.stringify(educacion))
-    return this.http.post(url,body,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
     //return this.http.post("http://localhost:8080/new/educacion", body,{'headers':headers});
    
   }
@@ -112,7 +112,7 @@ export class PortfolioService {
     const body = JSON.stringify(experiencia);
     console.log(url)
     console.log(JSON.stringify(experiencia))
-    return this.http.post(url,body,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
@@ -122,7 +122,7 @@ export class PortfolioService {
     const body = JSON.stringify(aptitud);
     console.log(url)
     console.log(JSON.stringify(aptitud))
-    return this.http.post(url,body,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
@@ -132,7 +132,7 @@ export class PortfolioService {
     const body = JSON.stringify(logro);
     console.log(url)
     console.log(JSON.stringify(logro))
-    return this.http.post(url,body,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
