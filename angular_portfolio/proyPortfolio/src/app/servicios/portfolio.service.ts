@@ -21,7 +21,7 @@ export class PortfolioService {
   logroList: logro[] = []    
   API_URL = 'https://yoprogramo-jaragon78.koyeb.app/api/test/'; //'http://localhost:8080/api/test/'; // 
 
-  private apiUrl = 'https://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080'; // 
+  apiUrl = 'https://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080'; // 
  // courrentUserSubject: BehaviorSubject<any>;
   //token: any; 
 
