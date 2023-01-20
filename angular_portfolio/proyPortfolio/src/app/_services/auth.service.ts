@@ -8,7 +8,8 @@ import { StorageService } from './storage.service';
 const AUTH_API = 'https://yoprogramo-jaragon78.koyeb.app/api/auth/'; // 'http://localhost:8080/api/auth/'; //
 
 const httpOptions = {
-  headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+//  headers: new HttpHeaders({ 'Access-Control-Allow-Origin': '*' })
+  headers: new HttpHeaders({ 'Content-Type': 'application/json',responseType: 'text' })
 };
 
 @Injectable({
@@ -47,7 +48,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-    return this.http.post(AUTH_API + 'signout',{});//, httpOptions);
+    return this.http.post(AUTH_API + 'signout',{ }, httpOptions);
   }
 
   get usuarioAutenticado(){

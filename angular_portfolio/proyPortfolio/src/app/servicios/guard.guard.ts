@@ -22,7 +22,7 @@ export class GuardGuard implements CanActivate {
       console.log("Autorizado");
       return true;
     }else{
-      console.log("ERROR");
+      alert("ERROR");
       this.rutas.navigate(['/home']);
       return false;
     }

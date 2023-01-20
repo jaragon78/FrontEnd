@@ -21,7 +21,7 @@ export class PortfolioService {
   logroList: logro[] = []    
   API_URL = 'https://yoprogramo-jaragon78.koyeb.app/api/test/'; //'http://localhost:8080/api/test/'; // 
 
-  apiUrl = 'https://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080'; // 
+  private apiUrl = 'https://yoprogramo-jaragon78.koyeb.app'; //'http://localhost:8080'; // 
  // courrentUserSubject: BehaviorSubject<any>;
   //token: any; 
 
@@ -85,54 +85,59 @@ export class PortfolioService {
  // }
 
   public guardarPersona(persona: any): Observable<any>{
-    const headers = {'Access-Control-Allow-Origin': '*'} ;
-    const url = `${this.apiUrl+"/put/persona"}`;
+   // const headers = {'Access-Control-Allow-Origin': '*'} ;
+   const headers = { 'content-type': 'application/json'} ; 
+   const url = `${this.apiUrl+"/put/persona"}`;
     const body = JSON.stringify(persona);
     console.log(url)
     console.log(JSON.stringify(persona))
-    return this.http.put(url,body);//,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
     //return this.http.post("http://localhost:8080/new/educacion", body,{'headers':headers});
    
   }
 
   public guardarEducacion(educacion: any): Observable<any>{
-    const headers = {'Access-Control-Allow-Origin': '*'} ;
+    //const headers = {'Access-Control-Allow-Origin': '*'} ;
+    const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/put/educacion"}`;
     const body = JSON.stringify(educacion);
     console.log(url)
     console.log(JSON.stringify(educacion))
-    return this.http.put(url,body);//,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
     //return this.http.post("http://localhost:8080/new/educacion", body,{'headers':headers});
    
   }
 
   public guardarExperiencia(experiencia: any): Observable<any>{
-    const headers = {'Access-Control-Allow-Origin': '*'} ;
+    //const headers = {'Access-Control-Allow-Origin': '*'} ;
+    const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/put/expLaboral"}`;
     const body = JSON.stringify(experiencia);
     console.log(url)
     console.log(JSON.stringify(experiencia))
-    return this.http.put(url,body);//,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
   public guardarAptitud(aptitud: any): Observable<any>{
-    const headers = {'Access-Control-Allow-Origin': '*'} ;
+    //const headers = {'Access-Control-Allow-Origin': '*'} ;
+    const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/put/tecnologia"}`;
     const body = JSON.stringify(aptitud);
     console.log(url)
     console.log(JSON.stringify(aptitud))
-    return this.http.put(url,body);//,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
   public guardarLogro(logro: any): Observable<any>{
-    const headers = {'Access-Control-Allow-Origin': '*'} ;
+    //const headers = {'Access-Control-Allow-Origin': '*'} ;
+    const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/put/proyecto"}`;
     const body = JSON.stringify(logro);
     console.log(url)
     console.log(JSON.stringify(logro))
-    return this.http.put(url,body);//,{'headers':headers});
+    return this.http.put(url,body,{'headers':headers});
    
   }
 
