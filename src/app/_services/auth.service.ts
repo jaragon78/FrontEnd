@@ -13,7 +13,7 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AuthService {
-  AUTH_API = 'http://localhost:8080/api/auth/';
+  AUTH_API = 'https://yoprogramo-jaragon78.koyeb.app/api/auth/';
 //  currentUserSubject: BehaviorSubject<any>;
   constructor(private http: HttpClient, private storageService: StorageService) {
     console.log("El servicio de autenticacion esta corriendo");
