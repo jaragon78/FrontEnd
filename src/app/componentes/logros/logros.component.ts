@@ -18,6 +18,7 @@ export class LogrosComponent implements OnInit {
   id_per: number;
   @Input() logro: logro = new logro()
   @Output() deleteItem:EventEmitter<logro> = new EventEmitter
+  errorMessage = '';
 
   constructor(private datosPortfolio:PortfolioService,  private formBuilder:FormBuilder,
               private modal: NgbModal, private modal2: NgbModal) {
@@ -59,14 +60,26 @@ export class LogrosComponent implements OnInit {
   borrarItem(logro: logro){     
    // this.deleteItem.emit(logro);
     this.borrarProyLista(logro);
-    window.location.reload();
+  //  window.location.reload();
   }
 
   borrarProyLista(logro: logro){
    // aca tengo que llamar al service para actualizar la base de datos, mientras tanto actualizo la lista 
    console.log(JSON.stringify(logro.id_proy));
-   this.datosPortfolio.deleteLogro(logro.id_proy).subscribe((response: any) => {
-     console.log(response);});
+   this.datosPortfolio.deleteLogro(logro.id_proy).subscribe(
+    //(response: any) => {
+    // console.log(response);});
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al Eliminar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
   }
 
  // get formLogros(){
@@ -100,23 +113,46 @@ export class LogrosComponent implements OnInit {
   
   guardarCambios(logro:logro){
     this.form.controls['personaId'].setValue(this.id_per);
-    this.datosPortfolio.guardarLogro(this.form.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form.value));
+    this.datosPortfolio.guardarLogro(this.form.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form.value));
   
-    this.modal.dismissAll();
-    window.location.reload();
-    
+    //this.modal.dismissAll();
+    //window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al guardar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
   }
 
   agregarLogro(event:Event){
     this.form2.controls['personaId'].setValue(this.id_per);
     console.log(this.form2.value)
-    this.datosPortfolio.guardarLogro(this.form2.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form2.value));
+    this.datosPortfolio.guardarLogro(this.form2.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form2.value));
   
-    this.modal2.dismissAll();
-    window.location.reload();
+    //this.modal2.dismissAll();
+    //window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al Agregar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
   }    
 }

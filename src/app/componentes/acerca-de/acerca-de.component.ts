@@ -16,7 +16,7 @@ export class AcercaDeComponent implements OnInit {
   //miPortfolio:any;
   form:FormGroup;
   persona:Persona;
-
+  errorMessage = '';
 
   constructor(private formBuilder:FormBuilder,private datosPortfolio:PortfolioService, private modal: NgbModal) { 
     this.persona = new Persona(); 
@@ -65,14 +65,22 @@ export class AcercaDeComponent implements OnInit {
   }
   
 
-  guardarCambios(){
+  guardarCambios():void{
     //this.persona.sobre_mi = this.form.controls['sobre_mi'].value; 
-    this.datosPortfolio.guardarPersona(this.form.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form.value));
-  
-    this.modal.dismissAll();
-    window.location.reload();
+    this.datosPortfolio.guardarPersona(this.form.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form.value));
+      {
+        next: data => {
+          this.modal.dismissAll();
+          window.location.reload();
+        },
+        error: err =>{
+          alert('Error al modificar');
+          this.errorMessage = err.error.message;
+        }  
     
+    });
   }
 }

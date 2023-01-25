@@ -20,6 +20,7 @@ export class ExperienciaComponent implements OnInit {
   @Output() deleteItem:EventEmitter<Experiencia> = new EventEmitter
   fechaInicio;
   fechaFin;
+  errorMessage = '';
 
   constructor(private datosPortfolio:PortfolioService,  private formBuilder:FormBuilder, 
               private modal: NgbModal, private modal2: NgbModal) {
@@ -74,15 +75,25 @@ export class ExperienciaComponent implements OnInit {
   borrarItem(experiencia:Experiencia){     
     //this.deleteItem.emit(experiencia);
     this.borrarExpLista(experiencia);
-    window.location.reload();
   }
 
  borrarExpLista(experiencia:Experiencia){
    // aca tengo que llamar al service para actualizar la base de datos, mientras tanto actualizo la lista 
    console.log(JSON.stringify(experiencia.id_expLab));
-   this.datosPortfolio.deleteExperiencia(experiencia.id_expLab).subscribe((response: any) => {
-     console.log(response);});
+   this.datosPortfolio.deleteExperiencia(experiencia.id_expLab).subscribe(
+    //(response: any) => {
+    // console.log(response);});
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al Eliminar');
+        this.errorMessage = err.error.message;
+      }  
 
+    });
  }
 
   openPopPup(experiencia:Experiencia,contenido:any){
@@ -108,13 +119,25 @@ export class ExperienciaComponent implements OnInit {
   
   guardarCambios(experiencia:Experiencia){
     this.form.controls['personaId'].setValue(this.id_per);
-    this.datosPortfolio.guardarExperiencia(this.form.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form.value));
+    this.datosPortfolio.guardarExperiencia(this.form.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form.value));
   
-    this.modal.dismissAll();
-    window.location.reload();
-  } 
+    //this.modal.dismissAll();
+   // window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al modificar');
+        this.errorMessage = err.error.message;
+      }  
+
+      });
+    } 
 
   agregarItem(contenido2:any){
 
@@ -131,11 +154,23 @@ export class ExperienciaComponent implements OnInit {
   agregarExperiencia(event:Event){
     this.form2.controls['personaId'].setValue(this.id_per);
     console.log(this.form2.value)
-    this.datosPortfolio.guardarExperiencia(this.form2.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form2.value));
+    this.datosPortfolio.agregarExperiencia(this.form2.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form2.value));
   
-    this.modal2.dismissAll();
-    window.location.reload();
+    //this.modal2.dismissAll();
+    //window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al agregar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
   }  
 }

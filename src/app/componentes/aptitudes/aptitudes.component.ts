@@ -19,6 +19,7 @@ export class AptitudesComponent implements OnInit {
   id_per: number;
   @Input() aptitud: aptitud = new aptitud();
   @Output() deleteItem:EventEmitter<aptitud> = new EventEmitter;
+  errorMessage = '';
 
   constructor(private datosPortfolio:PortfolioService, private formBuilder:FormBuilder, 
     private modal: NgbModal, private modal2: NgbModal) {
@@ -56,14 +57,25 @@ export class AptitudesComponent implements OnInit {
   borrarItem(aptitud:aptitud){     
    //this.deleteItem.emit(aptitud);
    this.borrarAptLista(aptitud);
-   window.location.reload();
   }
 
   borrarAptLista(aptitud:aptitud){
     // aca tengo que llamar al service para actualizar la base de datos, mientras tanto actualizo la lista 
     console.log(JSON.stringify(aptitud.id_tec));
-    this.datosPortfolio.deleteAptitud(aptitud.id_tec).subscribe((response: any) => {
-      console.log(response);});
+    this.datosPortfolio.deleteAptitud(aptitud.id_tec).subscribe(
+      //(response: any) => {
+     // console.log(response);});
+     {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al Eliminar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });     
   }
 
   openPopPup(aptitud:aptitud,contenido:any){
@@ -84,28 +96,41 @@ export class AptitudesComponent implements OnInit {
  
 
   guardarCambios(aptitud:aptitud){
-    console.log(this.form.controls['id_tec'].get)
-  
-    aptitud.skill = this.form.controls['skill'].value;
-    if (this.form.controls['porc'].value > 100 ){
-      this.aptitud.porc = 100; 
-    }else{
-      if (this.form.controls['porc'].value < 10 ){
-        this.aptitud.porc = 10;
+      console.log(this.form.controls['id_tec'].get)
+    
+      aptitud.skill = this.form.controls['skill'].value;
+      if (this.form.controls['porc'].value > 100 ){
+        this.aptitud.porc = 100; 
       }else{
-        this.aptitud.porc = this.form.controls['porc'].value;
-      }
-    }
+        if ((this.form.controls['porc'].value < 10) || (this.form.controls['porc'].value < ' ' )){
+          this.aptitud.porc = 10;
+        }else{
+          this.aptitud.porc = this.form.controls['porc'].value;
+        }
+      }   
+    
     
     
     this.form.controls['personaId'].setValue(this.id_per);
-    this.datosPortfolio.guardarAptitud(this.form.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form.value));
+    this.form.controls['porc'].setValue(this.aptitud.porc);
+    this.datosPortfolio.guardarAptitud(this.form.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form.value));
   
-    this.modal.dismissAll();
-    window.location.reload();
-    
+    //this.modal.dismissAll();
+    //window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al modificar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
   } 
 
   agregarItem(contenido2:any){
@@ -122,12 +147,23 @@ export class AptitudesComponent implements OnInit {
   agregarAptitud(event:Event){
     this.form2.controls['personaId'].setValue(this.id_per);
     console.log(this.form2.value)
-    this.datosPortfolio.guardarAptitud(this.form2.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form2.value));
+    this.datosPortfolio.agregarAptitud(this.form2.value).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+    //console.log(JSON.stringify(this.form2.value));
   
-    this.modal2.dismissAll();
-    window.location.reload();
-    
+    //this.modal2.dismissAll();
+   // window.location.reload();
+   {
+    next: data => {
+      this.modal.dismissAll();
+      window.location.reload();
+    },
+    error: err =>{
+      alert('Error al agregar');
+      this.errorMessage = err.error.message;
+    }  
+
+    });
   }
 }

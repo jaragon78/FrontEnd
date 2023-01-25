@@ -7,6 +7,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgModule } from '@angular/core';
 import { formatDate } from '@angular/common'
 import { AuthService } from 'src/app/_services/auth.service';
+import { Educacion } from 'src/app/models/Educacion';
 
 @Component({
   selector: 'app-encabezado',
@@ -18,6 +19,8 @@ export class EncabezadoComponent implements OnInit {
   persona: Persona;
   form:FormGroup;
   form2:FormGroup;
+  errorMessage = '';
+  educacionList: Educacion[] = [];
 
   constructor(private datosPortfolio:PortfolioService,  private ruta:Router, private authService:AuthService,
     private formBuilder:FormBuilder, private modal: NgbModal) { 
@@ -105,14 +108,26 @@ export class EncabezadoComponent implements OnInit {
    // this.modal.open(contenido2,{size:'xl'})
   }
 
-  guardarCambios(){
+  guardarCambios():void{
 
-    this.datosPortfolio.guardarPersona(this.form.value).subscribe((response: any) => {
-      console.log(response);});
-    console.log(JSON.stringify(this.form.value));
+    this.datosPortfolio.guardarPersona(this.form.value).subscribe(
+     // (response: any) => {
+     // console.log(response);});
+    //console.log(JSON.stringify(this.form.value));
   
-    this.modal.dismissAll();
-    window.location.reload();    
-    
-  }  
+    //this.modal.dismissAll();
+    //window.location.reload();    
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al modificar');
+        this.errorMessage = err.error.message;
+      }  
+  
+  });
+  }
+
 }

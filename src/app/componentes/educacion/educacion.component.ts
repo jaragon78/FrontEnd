@@ -21,6 +21,7 @@ export class EducacionComponent implements OnInit {
   form2:FormGroup;
   fechaInicio;
   fechaFin;
+  errorMessage = '';
 
   constructor(private datosPortfolio:PortfolioService, private formBuilder:FormBuilder, 
               private modal: NgbModal, private modal2: NgbModal) { 
@@ -78,15 +79,25 @@ export class EducacionComponent implements OnInit {
   borrarItem(educacion:Educacion){     
    // this.deleteItem.emit(educacion);
     this.borrarEduLista(educacion);
-    window.location.reload();
   }
 
  borrarEduLista(educacion:Educacion){
    // aca tengo que llamar al service para actualizar la base de datos, mientras tanto actualizo la lista 
     console.log(JSON.stringify(educacion.id_edu));
-    this.datosPortfolio.deleteEducacion(educacion.id_edu).subscribe((response: any) => {
-      console.log(response);});
-    
+    this.datosPortfolio.deleteEducacion(educacion.id_edu).subscribe(
+      //(response: any) => {
+      //console.log(response);});
+      {
+        next: data => {
+          this.modal.dismissAll();
+          window.location.reload();
+        },
+        error: err =>{
+          alert('Error al Eliminar');
+          this.errorMessage = err.error.message;
+        }  
+  
+      }); 
    // .subscribe(() =>{
    // this.educacionList = this.educacionList.filter( p =>p.id !== educacion.id)
  }
@@ -116,13 +127,26 @@ openPopPup(educacion:Educacion,contenido:any){
 
 guardarCambios(educacion:Educacion){
   this.form.controls['personaId'].setValue(this.id_per);
-  this.datosPortfolio.guardarEducacion(this.form.value).subscribe((response: any) => {
-    console.log(response);});
-  console.log(JSON.stringify(this.form.value));
+  this.datosPortfolio.guardarEducacion(this.form.value).subscribe(
+    //(response: any) => {
+    //console.log(response);});
+  //console.log(JSON.stringify(this.form.value));
 
-  this.modal.dismissAll();
-  window.location.reload();
+  //this.modal.dismissAll();
+  //window.location.reload();
+  {
+    next: data => {
+      this.modal.dismissAll();
+      window.location.reload();
+    },
+    error: err =>{
+      alert('Error al modificar');
+      this.errorMessage = err.error.message;
+    }  
+
+  });
 } 
+
 agregarItem(contenido2:any){
   this.form2.controls['universidad'].setValue("");
   this.form2.controls['titulo'].setValue("");
@@ -136,11 +160,23 @@ agregarItem(contenido2:any){
 agregarEducacion(event:Event){
   this.form2.controls['personaId'].setValue(this.id_per);
   console.log(this.form2.value)
-  this.datosPortfolio.guardarEducacion(this.form2.value).subscribe((response: any) => {
-    console.log(response);});
-  console.log(JSON.stringify(this.form2.value));
+  this.datosPortfolio.agregarEducacion(this.form2.value).subscribe(
+    //(response: any) => {
+    //console.log(response);});
+  //console.log(JSON.stringify(this.form2.value));
 
-  this.modal2.dismissAll();
-  window.location.reload();
-}
+  //this.modal2.dismissAll();
+  //window.location.reload();
+    {
+      next: data => {
+        this.modal.dismissAll();
+        window.location.reload();
+      },
+      error: err =>{
+        alert('Error al agregar');
+        this.errorMessage = err.error.message;
+      }  
+
+    });
+  }
 }
