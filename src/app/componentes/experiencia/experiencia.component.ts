@@ -50,14 +50,9 @@ export class ExperienciaComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    //this.datosPortfolio.obtenerDatos().subscribe(data =>{
-      //      console.log(data);
-     // this.experienciaList = data.experience;    
-    //}) 
     this.datosPortfolio.obtenerExp().subscribe(data =>{
       console.log ("Experiencia" + JSON.stringify(data));
       this.experienciaList = data;
-    //  this.id_per = data.personaId;
     }) 
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       console.log ("Datos Personales" + JSON.stringify(data));
@@ -66,14 +61,12 @@ export class ExperienciaComponent implements OnInit {
   }
 
   modificarFechas(fecha:string){
-    //for (let i = 0; i < this.educacionList.length; i++) {
       console.log(fecha)
       this.fechaInicio = new Date(fecha);
       return this.fechaInicio.setMinutes(this.fechaInicio.getMinutes() + this.fechaInicio.getTimezoneOffset())
   }
 
   borrarItem(experiencia:Experiencia){     
-    //this.deleteItem.emit(experiencia);
     this.borrarExpLista(experiencia);
   }
 
@@ -82,7 +75,6 @@ export class ExperienciaComponent implements OnInit {
    console.log(JSON.stringify(experiencia.id_expLab));
    this.datosPortfolio.deleteExperiencia(experiencia.id_expLab).subscribe(
     //(response: any) => {
-    // console.log(response);});
     {
       next: data => {
         this.modal.dismissAll();
@@ -121,11 +113,6 @@ export class ExperienciaComponent implements OnInit {
     this.form.controls['personaId'].setValue(this.id_per);
     this.datosPortfolio.guardarExperiencia(this.form.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form.value));
-  
-    //this.modal.dismissAll();
-   // window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();
@@ -140,8 +127,6 @@ export class ExperienciaComponent implements OnInit {
     } 
 
   agregarItem(contenido2:any){
-
-   // this.form2.controls['id_expLab'].setValue(this.experienciaList.length + 1);
     this.form2.controls['nombre_empresa'].setValue("");
     this.form2.controls['descripcion'].setValue("");
     this.form2.controls['fechaInicio'].setValue("");
@@ -156,11 +141,6 @@ export class ExperienciaComponent implements OnInit {
     console.log(this.form2.value)
     this.datosPortfolio.agregarExperiencia(this.form2.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form2.value));
-  
-    //this.modal2.dismissAll();
-    //window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();

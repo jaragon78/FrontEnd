@@ -13,7 +13,6 @@ import { formatDate } from '@angular/common';
   styleUrls: ['./acerca-de.component.css']
 })
 export class AcercaDeComponent implements OnInit {
-  //miPortfolio:any;
   form:FormGroup;
   persona:Persona;
   errorMessage = '';
@@ -65,12 +64,9 @@ export class AcercaDeComponent implements OnInit {
   }
   
 
-  guardarCambios():void{
-    //this.persona.sobre_mi = this.form.controls['sobre_mi'].value; 
+  guardarCambios():void{ 
     this.datosPortfolio.guardarPersona(this.form.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form.value));
       {
         next: data => {
           this.modal.dismissAll();

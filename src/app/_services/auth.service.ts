@@ -46,9 +46,7 @@ export class AuthService {
   }
 
   logout(): Observable<any> {
-  //  localStorage.removeItem(window.sessionStorage.getItem(USER_KEY));
-    window.sessionStorage.clear();  
-    //window.sessionStorage.removeItem;
+    this.storageService.clean();  
     return this.http.post(this.AUTH_API + 'signout',{});
   }
 

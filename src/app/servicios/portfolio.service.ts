@@ -14,13 +14,12 @@ import { AuthService } from '../_services/auth.service';
   providedIn: 'root'
 })
 export class PortfolioService {
-//  private apiUrl = "http://localhost:5001/data"
+
   educacionList: Educacion[] = []
   experienciaList: Experiencia[] = []
   aptitudList: aptitud[] = []  
   logroList: logro[] = []    
-  //API_URL = 'http://localhost:8080/api/test/';
-  //apiUrl = 'http://localhost:8080';
+
   API_URL = 'https://yoprogramo-jaragon78.koyeb.app/api/test/'; 
   private apiUrl = 'https://yoprogramo-jaragon78.koyeb.app'; 
  // courrentUserSubject: BehaviorSubject<any>;
@@ -31,31 +30,32 @@ export class PortfolioService {
    // this.courrentUserSubject = new BehaviorSubject<any>(JSON.parse(sessionStorage.getItem('currentUser')||'{}'))
   }
   
+  /* Obtengo lista de usuario registrados*/
   obtenerListaUser():Observable<any>{
     return this.http.get<any>(this.apiUrl+"/ver/listaUser")
    }
 
+  /* Obtengo perfil de un usuario  registrados*/
   verPerfil(username:any):Observable<any>{
   console.log ( JSON.stringify(this.apiUrl+"/get/username/"+ username));
    return this.http.get<any>(this.apiUrl+"/get/username/"+ username)
   }
 
+  /* Valida si existe usuario*/  
   existeUsr(email:string):Observable<any>{
     var currentUser=this.autServicio.usuarioAutenticado
    console.log("leyendo datos de portfolio service" );
    return this.http.get<any>(this.apiUrl+"/get/existeUser/"+ email)
-   //return this.http.get<any>("http://localhost:8080/get/existeUser/"+ email)
   }
 
+  /* Obtengo los datos de la persona logueada*/
   obtenerDatos():Observable<any>{
     var currentUser=this.autServicio.usuarioAutenticado
-    //return this.http.get<Task[]>(this.apiUrl); //('./assets/data/data.json');
    console.log(currentUser.id);
-   //return this.http.get<any>(this.apiUrl+"get/personas")
    return this.http.get<any>(this.apiUrl+"/get/persona/"+ currentUser.id)
-   //return this.http.get(this.apiUrl);
   }
-  
+
+  /* Guardo cambios de la persona*/  
   public guardarPersona(persona: Persona): Observable<any>{
     const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/put/persona"}`;
@@ -63,10 +63,10 @@ export class PortfolioService {
     console.log(url)
     console.log(JSON.stringify(persona))
     return this.http.put<any>(url,body,{'headers':headers});
-    //return this.http.post("http://localhost:8080/new/educacion", body,{'headers':headers});
    
   }
 
+  /* CRUD Educacion usuario registrado*/
   obtenerEdu():Observable<any>{
     var currentUser=this.autServicio.usuarioAutenticado
    console.log("leyendo datos de portfolio service" );
@@ -74,7 +74,6 @@ export class PortfolioService {
   }
 
   public agregarEducacion(educacion: Educacion): Observable<any>{
-    /* if (educacion.id_edu == ' '){*/
        const headers = { 'content-type': 'application/json'} ;
        const url = `${this.apiUrl+"/new/educacion"}`;
        const body = JSON.stringify(educacion);
@@ -84,7 +83,6 @@ export class PortfolioService {
    }
  
   public guardarEducacion(educacion: Educacion): Observable<any>{
-    /* if (educacion.id_edu == ' '){*/
        const headers = { 'content-type': 'application/json'} ;
        const url = `${this.apiUrl+"/put/educacion"}`;
        const body = JSON.stringify(educacion);
@@ -95,7 +93,6 @@ export class PortfolioService {
    
     
   deleteEducacion(id:number):Observable<any>{
-   // const id = typeof educacion === 'number' ? educacion : educacion.id;
     const url = `${this.apiUrl+"/deleteEdu"}/${id}`;
     console.log(url);
     return this.http.delete<Educacion>(url);
@@ -108,6 +105,7 @@ export class PortfolioService {
    return this.http.get<any>(this.apiUrl+"/ver/listaExpLaboral/"+ currentUser.id)
   }
 
+  /* CRUD Experiencia usuario registrado*/
   public agregarExperiencia(experiencia: Experiencia): Observable<any>{
     const headers = { 'content-type': 'application/json'} ;
     const url = `${this.apiUrl+"/new/expLaboral"}`;
@@ -129,12 +127,12 @@ export class PortfolioService {
   }
    
   deleteExperiencia(id:number):Observable<any>{
-    // const id = typeof educacion === 'number' ? educacion : educacion.id;
      const url = `${this.apiUrl+"/deleteExp"}/${id}`;
      console.log(url);
      return this.http.delete<Experiencia>(url)
    }
 
+  /* CRUD Aptitud usuario registrado*/  
   obtenerApt():Observable<any>{
     var currentUser=this.autServicio.usuarioAutenticado
    console.log("leyendo datos de portfolio service" );
@@ -162,12 +160,12 @@ export class PortfolioService {
   }
 
    deleteAptitud(id:number):Observable<any>{
-    // const id = typeof educacion === 'number' ? educacion : educacion.id;
      const url = `${this.apiUrl+"/deleteTecno"}/${id}`;
      console.log(url);
      return this.http.delete<aptitud>(url)
    } 
 
+  /* CRUD Logros usuario registrado*/
   obtenerLog():Observable<any>{
     var currentUser=this.autServicio.usuarioAutenticado
    console.log("leyendo datos de portfolio service" );
@@ -195,14 +193,13 @@ export class PortfolioService {
   }
   
    deleteLogro(id:number):Observable<any>{
-    // const id = typeof educacion === 'number' ? educacion : educacion.id;
      const url = `${this.apiUrl+"/deleteProy"}/${id}`;
      console.log(url);
      return this.http.delete<logro>(url)
    }  
 
-   getPublicContent(): Observable<any> {
-    console.log("leyendo datos de portfolio service" );
+  /* Get para saber el role de usuario*/
+  getPublicContent(): Observable<any> {
     return this.http.get(this.API_URL + 'all', { responseType: 'text' });
   }
 

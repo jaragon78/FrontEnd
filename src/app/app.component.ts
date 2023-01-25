@@ -51,8 +51,8 @@ export class AppComponent implements OnInit {
     this.authService.logout().subscribe({
       next: res => {
         console.log(res);
-        window.location.reload();
-        this.storageService.clean();
+        //this.storageService.clean();
+        //window.location.reload();
         this.ruta.navigate(['/home']);
       },
       error: err => {

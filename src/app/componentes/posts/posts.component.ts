@@ -15,7 +15,6 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  //private apiUrl =  'http://localhost:8080';
   apiUrl =  'https://yoprogramo-jaragon78.koyeb.app'; 
   filterPost = '';
   posts: any[];
@@ -120,7 +119,6 @@ export class PostsComponent implements OnInit {
   }
 
   modificarFechas(fecha:string){
-    //for (let i = 0; i < this.educacionList.length; i++) {
       console.log(fecha)
       this.fechaInicio = new Date(fecha);
       return this.fechaInicio.setMinutes(this.fechaInicio.getMinutes() + this.fechaInicio.getTimezoneOffset())

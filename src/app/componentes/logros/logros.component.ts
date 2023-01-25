@@ -41,14 +41,9 @@ export class LogrosComponent implements OnInit {
   }
 
   ngOnInit(): void {
-   // this.datosPortfolio.obtenerDatos().subscribe(data =>{
-//      console.log(data);
-    //  this.logrosList = data.project;    
-   // })  
     this.datosPortfolio.obtenerLog().subscribe(data =>{
     console.log ("Proyectos" + JSON.stringify(data));
-    this.logrosList = data;     
-    //this.id_per = data.personaId;   
+    this.logrosList = data;      
     })
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       console.log ("Datos Personales" + JSON.stringify(data));
@@ -58,9 +53,7 @@ export class LogrosComponent implements OnInit {
   }
 
   borrarItem(logro: logro){     
-   // this.deleteItem.emit(logro);
     this.borrarProyLista(logro);
-  //  window.location.reload();
   }
 
   borrarProyLista(logro: logro){
@@ -68,7 +61,6 @@ export class LogrosComponent implements OnInit {
    console.log(JSON.stringify(logro.id_proy));
    this.datosPortfolio.deleteLogro(logro.id_proy).subscribe(
     //(response: any) => {
-    // console.log(response);});
     {
       next: data => {
         this.modal.dismissAll();
@@ -82,13 +74,6 @@ export class LogrosComponent implements OnInit {
     });
   }
 
- // get formLogros(){
-  //  return this.form.get('formLogros') as FormArray;
- // }
-
-  //addFormLogros(){
-  //  this.formLogros.push(this.formBuilder.control(''));
- // }
 
   openPopPup(logro:logro,contenido:any){
     console.log(JSON.stringify(logro))
@@ -115,11 +100,6 @@ export class LogrosComponent implements OnInit {
     this.form.controls['personaId'].setValue(this.id_per);
     this.datosPortfolio.guardarLogro(this.form.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form.value));
-  
-    //this.modal.dismissAll();
-    //window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();
@@ -138,11 +118,6 @@ export class LogrosComponent implements OnInit {
     console.log(this.form2.value)
     this.datosPortfolio.guardarLogro(this.form2.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form2.value));
-  
-    //this.modal2.dismissAll();
-    //window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();

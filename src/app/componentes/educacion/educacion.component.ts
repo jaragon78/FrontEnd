@@ -51,18 +51,10 @@ export class EducacionComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  //    this.getAllEducacion()
-   // this.datosPortfolio.obtenerDatos().subscribe(data =>{       
-   //       this.educacionList = data[0].educacionList;
-   // })
-
     this.datosPortfolio.obtenerEdu().subscribe(data =>{
       console.log ("Educacion" + JSON.stringify(data));
-      this.educacionList = data;
-      //this.id_per = data.personaId;      
+      this.educacionList = data;     
     }) 
-
-//    this.educacionList.sort(order,)
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       console.log ("Datos Personales" + JSON.stringify(data));
       this.id_per = data.id_per;
@@ -70,14 +62,12 @@ export class EducacionComponent implements OnInit {
   }
   
   modificarFechas(fecha:string){
-    //for (let i = 0; i < this.educacionList.length; i++) {
       console.log(fecha)
       this.fechaInicio = new Date(fecha);
       return this.fechaInicio.setMinutes(this.fechaInicio.getMinutes() + this.fechaInicio.getTimezoneOffset())
   }
   
   borrarItem(educacion:Educacion){     
-   // this.deleteItem.emit(educacion);
     this.borrarEduLista(educacion);
   }
 
@@ -86,7 +76,6 @@ export class EducacionComponent implements OnInit {
     console.log(JSON.stringify(educacion.id_edu));
     this.datosPortfolio.deleteEducacion(educacion.id_edu).subscribe(
       //(response: any) => {
-      //console.log(response);});
       {
         next: data => {
           this.modal.dismissAll();
@@ -98,8 +87,6 @@ export class EducacionComponent implements OnInit {
         }  
   
       }); 
-   // .subscribe(() =>{
-   // this.educacionList = this.educacionList.filter( p =>p.id !== educacion.id)
  }
 
 openPopPup(educacion:Educacion,contenido:any){
@@ -109,11 +96,9 @@ openPopPup(educacion:Educacion,contenido:any){
   this.form.controls['universidad'].setValue(educacion.universidad);
   this.form.controls['titulo'].setValue(educacion.titulo);
   this.fechaInicio = new Date(educacion.fechaInicio);
-  //console.log(educacion.fechaInicio, formatDate(educacion.fechaInicio,'medium','es'))
   this.fechaInicio = new Date(educacion.fechaInicio);
   this.fechaInicio.setMinutes(this.fechaInicio.getMinutes() + this.fechaInicio.getTimezoneOffset())
   this.form.controls['fechaInicio'].setValue(formatDate(this.fechaInicio,'yyyy-MM-dd','es'));
-    //(educacion.fechaInicio,'yyyy-MM-dd','es'));
   this.fechaFin = new Date(educacion.fechaFin);
   this.fechaFin.setMinutes(this.fechaFin.getMinutes() + this.fechaFin.getTimezoneOffset())
   this.form.controls['fechaFin'].setValue(formatDate(this.fechaFin,'yyyy-MM-dd','es'));
@@ -129,11 +114,6 @@ guardarCambios(educacion:Educacion){
   this.form.controls['personaId'].setValue(this.id_per);
   this.datosPortfolio.guardarEducacion(this.form.value).subscribe(
     //(response: any) => {
-    //console.log(response);});
-  //console.log(JSON.stringify(this.form.value));
-
-  //this.modal.dismissAll();
-  //window.location.reload();
   {
     next: data => {
       this.modal.dismissAll();
@@ -162,11 +142,6 @@ agregarEducacion(event:Event){
   console.log(this.form2.value)
   this.datosPortfolio.agregarEducacion(this.form2.value).subscribe(
     //(response: any) => {
-    //console.log(response);});
-  //console.log(JSON.stringify(this.form2.value));
-
-  //this.modal2.dismissAll();
-  //window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();

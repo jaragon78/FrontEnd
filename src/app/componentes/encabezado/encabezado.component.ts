@@ -15,12 +15,11 @@ import { Educacion } from 'src/app/models/Educacion';
   styleUrls: ['./encabezado.component.css']
 })
 export class EncabezadoComponent implements OnInit {
-  //miPortfolio:any;
   persona: Persona;
   form:FormGroup;
   form2:FormGroup;
   errorMessage = '';
-  educacionList: Educacion[] = [];
+  displayStyle = "none";
 
   constructor(private datosPortfolio:PortfolioService,  private ruta:Router, private authService:AuthService,
     private formBuilder:FormBuilder, private modal: NgbModal) { 
@@ -53,7 +52,6 @@ export class EncabezadoComponent implements OnInit {
     console.log ("Encabezado");
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       console.log ("Encabezado" + JSON.stringify(data));
-      //this.miPortfolio = data;
       this.persona.id_per = data.id_per;
       this.persona.nombre = data.nombre;
       this.persona.apellido = data.apellido;
@@ -65,15 +63,7 @@ export class EncabezadoComponent implements OnInit {
       this.persona.url_fondo = data.url_fondo;
     } );
   }
-
-  displayStyle = "none";
-  
-  //cerrarSesion() {
-  // this.authService.logout;
-  // this.ruta.navigate(['/home']);
-    //this.displayStyle = "block";
- // }
-  
+ 
   closePopup() {
     this.displayStyle = "none";
   }
@@ -104,19 +94,13 @@ export class EncabezadoComponent implements OnInit {
       backdrop: 'static',
       size:'md'
      });
-   
-   // this.modal.open(contenido2,{size:'xl'})
+
   }
 
   guardarCambios():void{
 
     this.datosPortfolio.guardarPersona(this.form.value).subscribe(
-     // (response: any) => {
-     // console.log(response);});
-    //console.log(JSON.stringify(this.form.value));
-  
-    //this.modal.dismissAll();
-    //window.location.reload();    
+     // (response: any) => {    
     {
       next: data => {
         this.modal.dismissAll();

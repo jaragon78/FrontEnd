@@ -31,7 +31,6 @@ import { PortfolioService } from './servicios/portfolio.service';
 import { PortfolioComponent } from './componentes/portfolio/portfolio.component';
 import { PostsComponent } from './componentes/posts/posts.component';
 import { FilterPipe } from './pipes/filter.pipe';
-//import { InterceptorService } from './servicios/interceptor.service';
 registerLocaleData(localeEs,'es'); 
 
 @NgModule({
@@ -85,7 +84,6 @@ registerLocaleData(localeEs,'es');
   ],
 schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
 providers: [PortfolioService, {provide: LOCALE_ID, useValue: 'es'},
-//{ provide: HTTP_INTERCEPTORS, InterceptorService, multi: true }
 ],
 bootstrap: [AppComponent]
 })

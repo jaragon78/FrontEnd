@@ -38,16 +38,10 @@ export class AptitudesComponent implements OnInit {
         this.id_per = 0;
   }
 
-  ngOnInit(): void {
-   // this.datosPortfolio.obtenerDatos().subscribe(data =>{
-   //  console.log(data);
-   //   this.aptitudesList = data.HardSoftSkills;   
-   // }) 
-    
+  ngOnInit(): void { 
     this.datosPortfolio.obtenerApt().subscribe(data =>{
       console.log ("Aptitudes" + JSON.stringify(data));
     this.aptitudesList = data;    
-    //this.id_per = data.personaId;
     })
     this.datosPortfolio.obtenerDatos().subscribe(data =>{
       console.log ("Datos Personales" + JSON.stringify(data));
@@ -55,7 +49,6 @@ export class AptitudesComponent implements OnInit {
     })
   }
   borrarItem(aptitud:aptitud){     
-   //this.deleteItem.emit(aptitud);
    this.borrarAptLista(aptitud);
   }
 
@@ -64,7 +57,6 @@ export class AptitudesComponent implements OnInit {
     console.log(JSON.stringify(aptitud.id_tec));
     this.datosPortfolio.deleteAptitud(aptitud.id_tec).subscribe(
       //(response: any) => {
-     // console.log(response);});
      {
       next: data => {
         this.modal.dismissAll();
@@ -90,8 +82,6 @@ export class AptitudesComponent implements OnInit {
       backdrop: 'static',
       size:'sm'
      });
-   // this.modal.open(contenido,{size:'xl'})
-    
   }
  
 
@@ -115,11 +105,6 @@ export class AptitudesComponent implements OnInit {
     this.form.controls['porc'].setValue(this.aptitud.porc);
     this.datosPortfolio.guardarAptitud(this.form.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form.value));
-  
-    //this.modal.dismissAll();
-    //window.location.reload();
     {
       next: data => {
         this.modal.dismissAll();
@@ -134,7 +119,6 @@ export class AptitudesComponent implements OnInit {
   } 
 
   agregarItem(contenido2:any){
-    //this.form2.controls['id_tec'].setValue(this.aptitudesList.length + 1);
     this.form2.controls['skill'].setValue("");
     this.form2.controls['porc'].setValue("");
     this.modal2.open(contenido2, {
@@ -149,11 +133,6 @@ export class AptitudesComponent implements OnInit {
     console.log(this.form2.value)
     this.datosPortfolio.agregarAptitud(this.form2.value).subscribe(
       //(response: any) => {
-      //console.log(response);});
-    //console.log(JSON.stringify(this.form2.value));
-  
-    //this.modal2.dismissAll();
-   // window.location.reload();
    {
     next: data => {
       this.modal.dismissAll();
